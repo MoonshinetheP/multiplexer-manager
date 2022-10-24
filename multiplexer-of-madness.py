@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-import scipy as sp
-from sp.scipy.stats import linregress
+from scipy.stats import linregress
 
 path = 'C:/Users/SLinf/Documents/GitHub/multiplexer-of-madness/'
 file = 'test.csv'
