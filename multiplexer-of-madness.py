@@ -15,8 +15,8 @@ array = ndf.to_numpy()
 
 #convert to 4D array - current version is reaching correct shape, but data is in wrong place
 TDarray= np.array_split(array, 16)
-FDarray = np.array_split(TDarray, (int(array.shape[1])/64))
-print(type(FDarray))
+#FDarray = np.array_split(TDarray, (int(array.shape[1])/64))
+print(type(TDarray))
 #new = narray[0,0,:,:]
 #print((new[:,0:1]).size)
 
