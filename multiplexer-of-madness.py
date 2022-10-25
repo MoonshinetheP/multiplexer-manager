@@ -36,33 +36,32 @@ for x in resplity:
     if x > start:
         pass
     else:
-        start_index = (np.where(resplity == x))[0][0]
+        start_index = int((np.where(resplity == x))[0][0])
         break
 
 for y in resplity:
     if y > stop:
         pass
     else:
-        stop_index = (np.where(resplity == y))[0][0]
+        stop_index = int((np.where(resplity == y))[0][0])
         break
+
 
 '''Linear regression'''
 print(type(start_index), start_index, type(stop_index), stop_index)
-#extraction = linregress(resplitx[start_index:stop_index], resplity[start_index:stop_index])
+testx = np.array(resplitx[start_index:stop_index])
+testy = np.array(resplity[start_index:stop_index])
+print(type(array))
+#data = np.stack(testx, testy)
+extraction = linregress(testx.astype(float), testy.astype(float))
 
 
-#print(extraction[0])
-#slope = extraction[0]
-#intercept = extraction[1]
-#R = extraction[2]
-
-
-'''Data extraction
+'''Data extraction'''
 
 with open('example.txt', 'w') as file:
-    for x in evenafter:
+    for x in testy:
         file.write(str(x) + '\n')
-'''
+
 #for x in narray[:,:,1,1]:
     #print(x[:,2:4])
     
@@ -75,12 +74,12 @@ with open('example.txt', 'w') as file:
 '''Plotting data'''
 x = resplitx
 y = resplity
-#z = extraction[0]*resplitx + extraction[1]
+z = extraction[0]*testx + extraction[1]
 fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
 
 ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
 
 ax.plot(x, y, linewidth = 1, linestyle = '-', color = 'green', marker = None, label = None)
-#ax.plot(resplitx[start_index:stop_index], z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = None)
+ax.plot(testx, z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = 'R =' + str(extraction[2]))
 plt.show()
 plt.close()
