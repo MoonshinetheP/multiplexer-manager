@@ -25,39 +25,48 @@ resplity = np.reshape(split[3], int(array.shape[0]))
 #resplitxy = np.concatenate((resplitx, resplity), axis = 1)
 
 '''Finding linear region'''
-test = np.diff(resplity)
-a = 0
-after = []
-while a < (test.size - 99):
-    window = test[a : a + 100]
-    after.append(np.average(window))
-    a += 1
+#Find the max and min current values for each scan
+#Find indices that correlate to those values
+minimum = np.min(resplity)
+maximum = np.max(resplity)
+range = maximum - minimum
+start = maximum - (0.2 * range)
+stop = minimum + (0.2 * range)
+print(minimum, maximum)
+start_index = 0
+stop_index = 0
 
-extra = np.diff(after)
+for x in resplity:
+    if x > start:
+        pass
+    else:
+        start_index = (np.where(resplity == x))[0][0]
+        break
 
-b = 0
-evenafter = []
-while b < (test.size - 99):
-    newwindow = np.array(extra[a : a + 100])
-    evenafter.append(np.average(newwindow))
-    b += 1
+for y in resplity:
+    if y > stop:
+        pass
+    else:
+        stop_index = (np.where(resplity == y))[0][0]
+        break
 
 '''Linear regression'''
-xa = np.arange(0 ,100, 1)
-ya = np.arange(0, 200, 2)
-extraction = linregress(xa, ya)
-print(extraction[0])
-slope = extraction[0]
-intercept = extraction[1]
-R = extraction[2]
+
+extraction = linregress(resplitx[start_index:stop_index], resplity[start_index:stop_index])
 
 
-'''Data extraction'''
+#print(extraction[0])
+#slope = extraction[0]
+#intercept = extraction[1]
+#R = extraction[2]
+
+
+'''Data extraction
 
 with open('example.txt', 'w') as file:
     for x in evenafter:
         file.write(str(x) + '\n')
-
+'''
 #for x in narray[:,:,1,1]:
     #print(x[:,2:4])
     
@@ -70,12 +79,12 @@ with open('example.txt', 'w') as file:
 '''Plotting data'''
 x = resplitx
 y = resplity
-
+z = extraction[0]*resplitx + extraction[1]
 fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
 
 ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
 
-ax.plot(x, y, linewidth = 2, linestyle = '-', color = 'green', marker = None, label = None)
-
+ax.plot(x, y, linewidth = 1, linestyle = '-', color = 'green', marker = None, label = None)
+ax.plot(resplitx[start_index : stop_index], z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = None)
 plt.show()
 plt.close()
