@@ -12,30 +12,26 @@ path = 'C:/Users/SLinf/Documents/GitHub/multiplexer-of-madness/'
 file = 'test.csv'
 df = pd.read_csv(path + file, sep = ',', header = 5, encoding = "utf16")
 ndf = df.dropna()   # removes null values (blank in excel) from the dataframe
-
 array = ndf.to_numpy()
-print(array.shape[1])
-#convert to 4D array - current version is reaching correct shape, but data is in wrong place
+
 
 '''Changing array shape'''
-#empty = np.ones((16, int((array.shape[1])/64), int(array.shape[0]), 4))
 split = np.split(array, int((array.shape[1])), axis = 1)
 resplitx = np.reshape(split[2], int(array.shape[0]))
 resplity = np.reshape(split[3], int(array.shape[0]))
-#resplitxy = np.concatenate((resplitx, resplity), axis = 1)
+
 
 '''Finding linear region'''
-#Find the max and min current values for each scan
-#Find indices that correlate to those values
-minimum = np.min(resplity)
-maximum = np.max(resplity)
-range = maximum - minimum
-start = maximum - (0.2 * range)
-stop = minimum + (0.2 * range)
-print(minimum, maximum)
-start_index = 0
-stop_index = 0
+# Find the max and min current values for each scan
+min = np.min(resplity)
+max = np.max(resplity)
 
+# Determine the current range over which linear regression will be performed
+range = max - min
+start = max - (0.2 * range)
+stop = min + (0.2 * range)
+
+# Find indices that correlate to this range
 for x in resplity:
     if x > start:
         pass
@@ -51,8 +47,8 @@ for y in resplity:
         break
 
 '''Linear regression'''
-
-extraction = linregress(resplitx[start_index:stop_index], resplity[start_index:stop_index])
+print(type(start_index), start_index, type(stop_index), stop_index)
+#extraction = linregress(resplitx[start_index:stop_index], resplity[start_index:stop_index])
 
 
 #print(extraction[0])
@@ -79,12 +75,12 @@ with open('example.txt', 'w') as file:
 '''Plotting data'''
 x = resplitx
 y = resplity
-z = extraction[0]*resplitx + extraction[1]
+#z = extraction[0]*resplitx + extraction[1]
 fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
 
 ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
 
 ax.plot(x, y, linewidth = 1, linestyle = '-', color = 'green', marker = None, label = None)
-ax.plot(resplitx[start_index : stop_index], z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = None)
+#ax.plot(resplitx[start_index:stop_index], z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = None)
 plt.show()
 plt.close()
