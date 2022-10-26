@@ -18,7 +18,7 @@ ndf = df.dropna()
 # Convert the dataframe to an array
 array = ndf.to_numpy()
 
-print(array.shape)
+
 '''Changing array shape'''
 # Convert the 2D array given by excel into a 4D array: (channel, experiment, dataset, data)
 # Note: Managed to make a 4D array, but data was placed incorrectly during reshape
