@@ -33,11 +33,27 @@ y_source = np.log10(np.absolute(array[ : , 1]))
 x_drain = array[ : , 2]
 y_drain = np.log10(np.absolute(array[ : , 3]))
 
-fit = piecewise_regression.Fit(x_drain, y_drain, n_breakpoints = 2)
-fit.summary
+smooth = np.convolve(y_drain, 100) / 100
+fit = piecewise_regression.Fit(x_drain, smooth, n_breakpoints = 2)
+bp1 = fit.get_results()['estimates']['breakpoint1']['estimate']
+bp2 = fit.get_results()['estimates']['breakpoint2']['estimate']
+
+for item in x_drain:
+    if item > bp1:
+        upper = int(np.where(x_drain == item))
+        break
+    else:
+        pass
+
+for item in x_drain:
+    if item > bp2:
+        lower = int(np.where(x_drain == item))
+        break
+    else:
+        pass
 
 
-'''
+
 linx = x_drain[upper:lower]
 liny = y_drain[upper:lower]
 
@@ -57,7 +73,7 @@ ax.plot(x_drain, y_drain, linewidth = 1, linestyle = '-', color = 'red', marker 
 ax.plot(linx, z, linewidth = 2, linestyle = '-', color = 'blue', marker = None, label = None)
 plt.show()
 plt.close()
-'''
+
 
 '''Finding linear region'''
 # Find the max and min current values for each scan
