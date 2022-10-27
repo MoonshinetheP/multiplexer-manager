@@ -86,4 +86,4 @@ with open('example.txt', 'w') as file:
 
 
 '''Colour map'''
-#hi """
+
