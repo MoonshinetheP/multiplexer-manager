@@ -40,22 +40,24 @@ bp2 = fit.get_results()['estimates']['breakpoint2']['estimate']
 
 for item in x_drain:
     if item > bp1:
-        upper = int(np.where(x_drain == item))
+        upper = np.where(x_drain == item)
+        upper_val = upper[0][0]
         break
     else:
         pass
 
 for item in x_drain:
     if item > bp2:
-        lower = int(np.where(x_drain == item))
+        lower = np.where(x_drain == item)
+        lower_val = lower[0][0]
         break
     else:
         pass
 
 
 
-linx = x_drain[upper:lower]
-liny = y_drain[upper:lower]
+linx = x_drain[upper_val:lower_val]
+liny = y_drain[upper_val:lower_val]
 
 
 extraction = linregress(linx, liny)
