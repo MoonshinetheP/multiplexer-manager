@@ -3,3 +3,5 @@ test.csv
 20221026_1400_PBS_MUA_1.pssession
 data.csv
 example.txt
+test.py
+__pycache__/multiplexer.cpython-311.pyc
