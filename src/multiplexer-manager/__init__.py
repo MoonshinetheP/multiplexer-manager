@@ -3,7 +3,7 @@ multiplexer-manager pip version
 
 """
 
-from .multiplexermanager import *
+from . import multiplexermanager
 
 __version__ = "1.0.3"
 __author__ = 'Steven Linfield'
