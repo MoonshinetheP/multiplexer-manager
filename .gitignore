@@ -1,1 +1,4 @@
-
+setup.cfg
+setup.py
+dist/
+multiplexer_manager.egg-info/
