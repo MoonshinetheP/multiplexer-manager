@@ -3,9 +3,9 @@ multiplexer-manager pip version
 
 """
 
-from . import multiplexermanager
+from .fileopener import *
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 __author__ = 'Steven Linfield'
 
-__all__ = ['multiplexermanager']
+__all__ = ['fileopener']
