@@ -13,7 +13,7 @@ pip install multiplexer-manager
 
 At the beginning of your code, import the multiplexer-manager module
 ```
-import multiplexer-manager as mm
+import multiplexermanager as mm
 ```
 
 Using a string containing the filename (with path) of your data, call an instance of the Multiplexer class
