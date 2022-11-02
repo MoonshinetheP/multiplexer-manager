@@ -12,7 +12,7 @@ class Multiplexer:
         self.bipot = bipot
         self.channels = channels
 
-    def open(self):    
+      
         dataframe = pd.read_csv(self.filepath, sep = ',', header = 5, encoding = "utf16", low_memory = False)
         newdataframe = dataframe.dropna()
         array = newdataframe.to_numpy().astype(float)
@@ -33,4 +33,4 @@ class Multiplexer:
                 for z in range(0,fields):
                     newarray[x,y,z,:] = array[:,(z+(experiments*y)+(fields*x))]
         
-        return newarray    
+        self.array = newarray    
