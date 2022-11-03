@@ -2,7 +2,7 @@ import numpy as np
 
 def smooth(input, window = 100):
     output = np.empty((input.shape))
-    for ix,iy in np.ndindex(input.shape[0:2]):
+    for ix,iy in np.ndindex((input.shape[0:2])):
         output[ix,iy,1,:] = np.convolve(input[ix,iy,1,:], window) / window
         output[ix,iy,3,:] = np.convolve(input[ix,iy,3,:], window) / window
     return output
