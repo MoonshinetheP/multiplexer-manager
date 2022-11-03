@@ -1,26 +1,28 @@
 import numpy as np
 
-def smooth():
-    pass
+def smooth(input, window = 100):
+    output = np.empty((input.shape))
+    for ix,iy in np.ndindex((input.shape[0:2])):
+        output[ix,iy,1,:] = np.convolve(input[ix,iy,1,:], window) / window
+        output[ix,iy,3,:] = np.convolve(input[ix,iy,3,:], window) / window
+    return output
 
-def linear_regression():
-    pass
-
-def peakfinder():
-    pass
+def peakfinder(input):
+    for ix,iy in np.ndindex((input.shape[0:2])):  
+        imax = np.max(input[ix,iy,3,:])
+        imax_index = np.argmax(input[ix,iy,3,:])
+        imin = np.min(input[ix,iy,3,:])
+        imin_index = np.argmin(input[ix,iy,3,:])
+    return(imax,imax_index,imin,imin_index)
 
 def logarithm(input):
-    working = input.array
-    output = np.empty((working.shape))
-    for x in range(0,working.shape[0]):
-        for y in range(0,working.shape[1]):
-            if input.bipot == True:
-                output[x,y,0,:] = working[x,y,0,:]
-                output[x,y,1,:] = np.log10(np.absolute(working[x,y,1,:]))
-                output[x,y,2,:] = working[x,y,2,:]
-                output[x,y,3,:] = np.log10(np.absolute(working[x,y,3,:]))
-
-            else:
-                output[x,y,0,:] = working[x,y,0,:]
-                output[x,y,1,:] = np.log10(np.absolute(working[x,y,1,:]))
+    output = np.empty((input.shape))
+    for ix,iy in np.ndindex((input.shape[0:2])):
+        output[ix,iy,0,:] = input[ix,iy,0,:]
+        output[ix,iy,1,:] = np.log10(np.absolute(input[ix,iy,1,:]))
+        output[ix,iy,2,:] = input[ix,iy,2,:]
+        output[ix,iy,3,:] = np.log10(np.absolute(input[ix,iy,3,:]))
     return output
+    
+def linear_regression(input):
+    pass
