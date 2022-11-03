@@ -13,122 +13,37 @@ plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['font.size'] = 20
 
 
-def compare_channels(array):
-    for x in range(0,array.shape[0]):
-    
+def compare_channels(input):
+    for ix in range(0, input.shape[0]):    
         fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
         ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
-        for axis in ['left', 'right', 'top', 'bottom']:
-            ax.spines[axis].set_visible(True)
-            ax.spines[axis].set_linewidth(1.5)
-            ax.spines[axis].set_color('black')
-
-        ax.set_axisbelow(True)
-        ax_xcopy = ax.twiny()
-        ax_ycopy = ax.twinx()
-        for y in range(0,array.shape[1]):
-            ax.plot(array[x,y,0,:], array[x,:,1,:], linewidth = 2, linestyle = '-', color = 'green', marker = None, label = 'W nanoelectrode')
+        ax.set_title('Channel ' + str(ix + 1), loc = 'center', pad = 20, fontsize = 15)
+        
+        for iy in range(0, input.shape[1]):
+            ax.plot(input[ix,iy,0,:], input[ix,iy,1,:], linewidth = 1, linestyle = '-', color = 'green', marker = None, label = None )
             try:
-                ax.plot(array[x,y,2,:], array[x,:,3,:], linewidth = 2, linestyle = '-', color = 'green', marker = None, label = 'W nanoelectrode')
+                ax.plot(input[ix,iy,2,:], input[ix,iy,3,:], linewidth = 1, linestyle = '-', color = 'red', marker = None, label = str(iy+1))
             except:
                 pass
 
-        ax.set_xlim(xmin = None, xmax = None, auto = True)
-        ax_xcopy.set_xlim(ax.get_xlim())
-        ax.set_ylim(ymin = None, ymax = None, auto = True)
-        ax_ycopy.set_ylim(ax.get_ylim())
-
-        ax.set_xlabel(r'$E\ vs.$ SMSE / V', labelpad = 15, fontsize = 25)
-        ax.set_ylabel('$i$ / pA', labelpad = 15, fontsize = 25)
-
-        ax.xaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'out', top = False)
-        ax.xaxis.set_major_locator(mpl.ticker.MultipleLocator(0.1))
-
-        ax.yaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'out', right = False)
-        ax.yaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
-
-        ax_xcopy.xaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'in', top = True)
-        ax_xcopy.xaxis.set_major_locator(mpl.ticker.MultipleLocator(0.1))
-        ax_xcopy.set_xticklabels([])
-
-        ax_ycopy.yaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'in', right = True)
-        ax_ycopy.yaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
-        ax_ycopy.set_yticklabels([])
-
-        ax.xaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'out', top = False)
-        ax.xaxis.set_minor_locator(mpl.ticker.MultipleLocator(0.05))
-
-        ax.yaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'out', right = False)
-        ax.yaxis.set_minor_locator(mpl.ticker.MultipleLocator(5))
-
-        ax_xcopy.xaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'in', top = True)
-        ax_xcopy.xaxis.set_minor_locator(mpl.ticker.MultipleLocator(0.05))
-
-        ax_ycopy.yaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'in', right = True)
-        ax_ycopy.yaxis.set_minor_locator(mpl.ticker.MultipleLocator(5))
-
-        ax.grid(which = 'major', axis = 'both', color = 'grey', linestyle = '--', linewidth = 0.5)
-
-        fig.tight_layout()
-        #output = 'example.png'
-        #plt.savefig(output, dpi = 100, quality = 95, transparent = False)
+        plt.legend(loc='best')
         plt.show()
         plt.close()
+        
+def compare_experiments(input):
+    for ix in range(0, input.shape[1]):    
+        fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
+        ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
+        ax.set_title('Experiment ' + str(ix + 1), loc = 'center', pad = 20, fontsize = 15)
+        
+        for iy in range(0, input.shape[0]):
+            ax.plot(input[iy,ix,0,:], input[iy,ix,1,:], linewidth = 1, linestyle = '-', color = 'green', marker = None, label = None )
+            try:
+                ax.plot(input[iy,ix,2,:], input[iy,ix,3,:], linewidth = 1, linestyle = '-', color = 'red', marker = None, label = str(iy+1))
+            except:
+                pass
 
-def compare_experiments(array):
-    for x in range(array.experiments):
-        pass
-    fig = plt.figure(num = 1, figsize = (6.4, 4.8), dpi = 100, facecolor = 'white', edgecolor = 'white', frameon = True)
-    ax = fig.add_axes([0.2, 0.2, 0.7, 0.7])
-    for axis in ['left', 'right', 'top', 'bottom']:
-        ax.spines[axis].set_visible(True)
-        ax.spines[axis].set_linewidth(1.5)
-        ax.spines[axis].set_color('black')
-
-    ax.set_axisbelow(True)
-    ax_xcopy = ax.twiny()
-    ax_ycopy = ax.twinx()
-
-    ax.plot(x, y, linewidth = 2, linestyle = '-', color = 'green', marker = None, label = 'W nanoelectrode')
-
-    ax.set_xlim(xmin = None, xmax = None, auto = True)
-    ax_xcopy.set_xlim(ax.get_xlim())
-    ax.set_ylim(ymin = None, ymax = None, auto = True)
-    ax_ycopy.set_ylim(ax.get_ylim())
-
-    ax.set_xlabel(r'$E\ vs.$ SMSE / V', labelpad = 15, fontsize = 25)
-    ax.set_ylabel('$i$ / pA', labelpad = 15, fontsize = 25)
-
-    ax.xaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'out', top = False)
-    ax.xaxis.set_major_locator(mpl.ticker.MultipleLocator(0.1))
-
-    ax.yaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'out', right = False)
-    ax.yaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
-
-    ax_xcopy.xaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'in', top = True)
-    ax_xcopy.xaxis.set_major_locator(mpl.ticker.MultipleLocator(0.1))
-    ax_xcopy.set_xticklabels([])
-
-    ax_ycopy.yaxis.set_tick_params(which = 'major', size = 10, width = 2, color = 'black', pad = 6, labelsize = 15, labelrotation = 0, direction = 'in', right = True)
-    ax_ycopy.yaxis.set_major_locator(mpl.ticker.MultipleLocator(10))
-    ax_ycopy.set_yticklabels([])
-
-    ax.xaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'out', top = False)
-    ax.xaxis.set_minor_locator(mpl.ticker.MultipleLocator(0.05))
-
-    ax.yaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'out', right = False)
-    ax.yaxis.set_minor_locator(mpl.ticker.MultipleLocator(5))
-
-    ax_xcopy.xaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'in', top = True)
-    ax_xcopy.xaxis.set_minor_locator(mpl.ticker.MultipleLocator(0.05))
-
-    ax_ycopy.yaxis.set_tick_params(which = 'minor', size = 5, width = 1.5, color = 'black', direction = 'in', right = True)
-    ax_ycopy.yaxis.set_minor_locator(mpl.ticker.MultipleLocator(5))
-
-    ax.grid(which = 'major', axis = 'both', color = 'grey', linestyle = '--', linewidth = 0.5)
-
-    fig.tight_layout()
-    output = 'example.png'
-    plt.savefig(output, dpi = 100, quality = 95, transparent = False)
-    plt.show()
-    plt.close()
+        plt.legend(loc='best')
+        plt.show()
+        plt.close()
+        

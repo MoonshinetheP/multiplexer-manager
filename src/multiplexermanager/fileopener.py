@@ -28,9 +28,7 @@ class Multiplexer:
         
         newarray = np.empty((self.channels,experiments,fields,rows))
 
-        for x in range(0, self.channels):
-            for y in range(0,experiments):
-                for z in range(0,fields):
-                    newarray[x,y,z,:] = array[:,(z+(experiments*y)+(fields*x))]
+        for x,y,z in np.ndindex((channels,experiments,fields)):
+            newarray[x,y,z,:] = array[:,(z+(channels*y)+(fields*x))]
         
         self.array = newarray    
