@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name = 'multiplexer-manager',
-    version = '1.2.0',
+    version = '1.2.1',
     author = 'Steven Linfield',
     author_email = 'S.Linfield@outlook.com',
     description = 'Easy analysis of electrochemical data from multiplexer files',
