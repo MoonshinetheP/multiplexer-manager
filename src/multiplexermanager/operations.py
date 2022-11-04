@@ -28,6 +28,9 @@ def logarithm(input):
         output[ix,iy,2,:] = input[ix,iy,2,:]
         output[ix,iy,3,:] = np.log10(np.absolute(input[ix,iy,3,:]))
     return output
+
+def ten_to_power(input):
+    pass
     
 def linear_regression(input):
     pass
