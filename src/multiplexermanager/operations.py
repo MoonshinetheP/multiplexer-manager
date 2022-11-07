@@ -54,7 +54,7 @@ def average_experiments(input):
     return output  
 
 def piecewise_regression(x, x0, x1, y1, y2, y3, k1, k2, k3):#k1 is 
-    return np.piecewise(x, [x < x0 ,x0 < x, x1 < x], [lambda x: k1*x + y1, lambda x: k2*x + y2, lambda x: k3*x + y3])
+    return np.piecewise(x, [x < x0 ,x0 < x, x1 < x], [lambda x: -k1*x + y1, lambda x: -k2*x + y2, lambda x: -k3*x + y3])
 
 def blah(input):    
     output = np.empty((input.shape))
