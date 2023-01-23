@@ -2,6 +2,11 @@
 import pandas as pd
 import numpy as np
 
+import operations as op
+import plotting as plot
+import FETs as fet
+
+
 
 class Multiplexer:
     '''Takes the .csv file from PSTrace as an input and returns a 4D array 
@@ -31,4 +36,14 @@ class Multiplexer:
         for x,y,z in np.ndindex((channels,experiments,fields)):
             newarray[x,y,z,:] = array[:,(z+(channels*y)+(fields*x))]
         
-        self.array = newarray    
+        self.array = newarray
+
+if __name__ == '__main__':
+    file = 'C:/Users/SLinf/Documents/GitHub/multiplexer-manager/src/multiplexermanager/20221017_1400_PBSpH7 ozoncleaner.csv'
+    instance = Multiplexer(file, bipot = True, channels = 16)
+    data = instance.array
+    plot.compare_channels(data)
+    #logged = op.logarithm(data)
+    #fet.piecewise(logged)
+    pass
+   

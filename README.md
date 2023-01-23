@@ -3,7 +3,8 @@
 This package is designed to allow users to manage multiplexer files and process them with a variety of functions (plotting, averaging, linear regression, etc.). So far there is only the capability to import .csv files from the PSTrace software from PalmSens B.V., but in future updates there may even be more flexibility with the multiplexer files that are compatible. 
 
 ## What's new?
-+ Fixed smooth()
++ Plotting functions now export to a .pdf file
++ Added averaging functions in both the operating and plotting files.
 
 ### Installation
 

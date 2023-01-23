@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name = 'multiplexer-manager',
-    version = '1.2.1',
+    version = '1.3.0',
     author = 'Steven Linfield',
     author_email = 'S.Linfield@outlook.com',
     description = 'Easy analysis of electrochemical data from multiplexer files',
@@ -22,5 +22,5 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Information Analysis"],
-    install_requires = ['numpy','pandas','matplotlib','scipy'],
+    install_requires = ['numpy','pandas','matplotlib','scipy','os','errno'],
 )

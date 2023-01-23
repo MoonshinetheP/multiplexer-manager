@@ -1,4 +1,8 @@
 setup.cfg
 setup.py
+__pycache__/
 dist/
 multiplexer_manager.egg-info/
+plots/
+20221017_1400_PBSpH7 ozoncleaner.csv
+20221026_1400_PBS_MUA_1.csv
